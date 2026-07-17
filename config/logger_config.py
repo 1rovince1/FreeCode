@@ -21,13 +21,13 @@ def setup_logging(LOG_DIR="logs", LOG_FILE="app.log"):
         "handlers": {
             "console_handler": {
                 "class": "logging.StreamHandler",
-                "level": "ERROR",
+                "level": "INFO",
                 "formatter": "console_formatter",
                 "stream": sys.stdout
             },
             "file_handler": {
                 "class": "logging.handlers.RotatingFileHandler",
-                "level": "DEBUG",
+                "level": "INFO",
                 "formatter": "file_formatter",
                 "filename": LOG_FILEPATH,
                 "maxBytes": 10*1024*1024,
