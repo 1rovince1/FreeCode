@@ -1,30 +1,33 @@
 from langgraph.graph import StateGraph, START, END
 
 from harnesses.coding_harness.states import MainAgentState
-from harnesses.coding_harness.nodes.main_agent import main_agent
-from harnesses.coding_harness.nodes.take_input import take_user_input
-from harnesses.coding_harness.nodes.continual_agent import continual_agent, continue_or_not
+from harnesses.coding_harness.nodes.main_agent import main_agent_node
+from harnesses.coding_harness.nodes.take_input import take_user_input_node
+from harnesses.coding_harness.nodes.continuation_agent import continuation_agent_node, should_continue_decision_node
 
 code_harness = StateGraph(MainAgentState)
 
-code_harness.add_node("user_input", take_user_input)
-code_harness.add_node("main_agent", main_agent)
-code_harness.add_node("should_continue", continual_agent)
+code_harness.add_node("user_input_agent", take_user_input_node)
+code_harness.add_node("main_agent", main_agent_node)
+code_harness.add_node("should_continue_agent", continuation_agent_node)
 
 # code_harness.add_edge(START, "main_agent")
 # code_harness.add_edge("main_agent", END)
 
-code_harness.add_edge(START, "user_input")
-code_harness.add_edge("user_input", "main_agent")
-code_harness.add_edge("main_agent", "should_continue")
-code_harness.add_conditional_edges(
-    "should_continue",
-    continue_or_not,
-    {
-        "complete": END,
-        "ongoing": "user_input"
-    }
-)
+# code_harness.add_edge(START, "user_input_agent")
+# code_harness.add_edge("user_input_agent", "main_agent")
+# code_harness.add_edge("main_agent", "should_continue_agent")
+# code_harness.add_conditional_edges(
+#     "should_continue_agent",
+#     should_continue_decision_node,
+#     {
+#         "complete": END,
+#         "ongoing": "user_input_agent"
+#     }
+# )
+
+code_harness.add_edge(START, "main_agent")
+code_harness.add_edge("main_agent", END)
 
 compiled_harness = code_harness.compile()
 

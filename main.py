@@ -7,13 +7,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from clients.ollama_llm_client import ollama_manager
-from api.coding_harness import router as CodingRouter
+from clients.redis_client import redis_manager
+from api.routes.coding_harness import router as CodingRouter
 
 
 @asynccontextmanager
 async def app_lifespan(app: FastAPI):
     await ollama_manager.connect()
+    await redis_manager.connect()
     yield
+    await redis_manager.disconnect()
     await ollama_manager.disconnect()
 
 fastapi_app = FastAPI(

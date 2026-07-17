@@ -3,7 +3,7 @@ from langsmith import traceable
 from harnesses.coding_harness.states import MainAgentState
 
 @traceable
-async def take_user_input(state: MainAgentState):
+async def take_user_input_node(state: MainAgentState):
     if not state.get("current_conversation_state", None):
         state["main_agent_messages"] = [{
             "role": "assistant",
