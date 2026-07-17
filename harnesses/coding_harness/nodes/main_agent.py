@@ -7,6 +7,7 @@ from langsmith import traceable
 
 from services.ollama_llm_service import call_llm
 from harnesses.coding_harness.states import MainAgentState
+from config.env_config import env_settings
 
 
 prompt = """
@@ -39,8 +40,7 @@ async def main_agent_node(state: MainAgentState):
 
 
     agent = create_deep_agent(
-        model="ollama:gemma4:cloud",
-        # model="ollama:gpt-oss:120b-cloud",
+        model=env_settings.OLLAMA_MAIN_AGENT_MODEL,
         system_prompt=prompt,
         backend=FilesystemBackend(
             root_dir="/home/unthinkable-lap/Desktop/practice/code_agent_harness/playground",
