@@ -1,0 +1,45 @@
+name: FreeCode CI/CD pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  update-graph:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install langgraph pygraphviz
+
+      - name: Generate graph image
+        run: |
+          python generate_graph.py
+
+      - name: Commit and push updated graph.png
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@://github.com"
+          
+          git add graph.png
+          if git diff --staged --quiet; then
+            echo "No changes to graph.png"
+          else
+            git commit -m "chore: auto-update langgraph flow diagram [skip ci]"
+            git push
+          fi
