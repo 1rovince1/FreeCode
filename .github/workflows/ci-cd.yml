@@ -29,6 +29,9 @@ jobs:
 
       - name: Generate graph image
         run: |
+          set -a
+          source .env
+          set +a
           python generate_graph.py
 
       - name: Commit and push updated graph.png
