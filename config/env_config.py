@@ -5,6 +5,7 @@ class EnvSettings(BaseSettings):
 
     OLLAMA_API_KEY: str
     OLLAMA_MAIN_AGENT_MODEL: str = "gemma4:cloud"
+    AGENT_WORK_DIR: str
 
     LOG_DIR: str = "dev_logs"
     LOG_FILE: str = "app.log"
