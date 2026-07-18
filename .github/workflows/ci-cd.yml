@@ -30,7 +30,7 @@ jobs:
       - name: Generate graph image
         run: |
           set -a
-          source .env
+          source .env.example
           set +a
           python generate_graph.py
 
