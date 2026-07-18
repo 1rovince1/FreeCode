@@ -24,7 +24,7 @@ Your tasks:
 
 @traceable
 async def main_agent_node(state: MainAgentState):
-    os.makedirs("../../../playground", exist_ok=True)
+    os.makedirs(env_settings.AGENT_WORK_DIR, exist_ok=True)
 
     # messages = [{
     #     "role": "system",
@@ -43,7 +43,7 @@ async def main_agent_node(state: MainAgentState):
         model=env_settings.OLLAMA_MAIN_AGENT_MODEL,
         system_prompt=prompt,
         backend=FilesystemBackend(
-            root_dir="/home/unthinkable-lap/Desktop/practice/code_agent_harness/playground",
+            root_dir=env_settings.AGENT_WORK_DIR,
             virtual_mode=True
         ),
         # backend=CompositeBackend(
@@ -58,7 +58,7 @@ async def main_agent_node(state: MainAgentState):
         permissions=[
             FilesystemPermission(
                 operations=["read", "write"],
-                paths=["/home/unthinkable-lap/Desktop/practice/code_agent_harness/playground/**"],
+                paths=[os.path.join(env_settings.AGENT_WORK_DIR, "**")],
                 mode="allow"
             )
         ]
