@@ -1,9 +1,9 @@
 from langgraph.graph import StateGraph, START, END
 
-from harnesses.coding_harness.states import MainAgentState
-from harnesses.coding_harness.nodes.main_agent import main_agent_node
-from harnesses.coding_harness.nodes.take_input import take_user_input_node
-from harnesses.coding_harness.nodes.continuation_agent import continuation_agent_node, should_continue_decision_node
+from coding_harness.states import MainAgentState
+from coding_harness.nodes.main_agent import main_agent_node
+from coding_harness.nodes.take_input import take_user_input_node
+from coding_harness.nodes.continuation_agent import continuation_agent_node, should_continue_decision_node
 
 code_harness = StateGraph(MainAgentState)
 

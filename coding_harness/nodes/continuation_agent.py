@@ -3,7 +3,7 @@ from pprint import pprint
 from langsmith import traceable
 
 from services.ollama_llm_service import call_llm
-from harnesses.coding_harness.states import MainAgentState
+from coding_harness.states import MainAgentState
 
 
 prompt = """

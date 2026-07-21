@@ -1,6 +1,6 @@
 from langsmith import traceable
 
-from harnesses.coding_harness.states import MainAgentState
+from coding_harness.states import MainAgentState
 
 @traceable
 async def take_user_input_node(state: MainAgentState):
