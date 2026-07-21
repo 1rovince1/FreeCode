@@ -3,7 +3,7 @@ from uuid import UUID
 import json
 
 from clients.redis_client import redis_manager
-from harnesses.coding_harness.orchestration import compiled_harness
+from coding_harness.orchestration import compiled_harness
 from helpers.message_utils import normalize_messages
 from config.env_config import env_settings
 

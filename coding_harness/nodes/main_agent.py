@@ -6,7 +6,7 @@ from deepagents.backends import FilesystemBackend, CompositeBackend, StateBacken
 from langsmith import traceable
 
 from services.ollama_llm_service import call_llm
-from harnesses.coding_harness.states import MainAgentState
+from coding_harness.states import MainAgentState
 from config.env_config import env_settings
 
 
