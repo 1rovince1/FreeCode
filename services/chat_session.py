@@ -4,7 +4,6 @@ import json
 
 from clients.redis_client import redis_manager
 from coding_harness.orchestration import compiled_harness
-from helpers.message_utils import normalize_messages
 from config.env_config import env_settings
 
 logger = logging.getLogger(__name__)
@@ -32,7 +31,6 @@ async def process_user_request(
     logger.info(f"User request processing result: {result}")
 
     workflow_messages = result.get("session_messages", [])
-    workflow_messages = normalize_messages(workflow_messages)
 
     await redis_manager.client.set(
         name=session_key,

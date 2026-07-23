@@ -23,7 +23,14 @@ async def tool_call(state: MainAgentState):
         )
     
     tool_results = await asyncio.gather(*tasks)
-    print(f"tool resutlts: {tool_results}")
+    logger.info(f"Tool results: {tool_results}")
     state["tool_results"] = tool_results
+    if tool_results:
+        for idx, tool_call in enumerate(tool_calls):
+            state["session_messages"].append({
+                "role": "tool",
+                "tool_name": tool_call["tool_name"],
+                "content": tool_results[idx]
+            })
     return state
     
