@@ -1,11 +1,12 @@
 import subprocess
 
+from config.env_config import env_settings
+
 ALLOWED_CMDS = ["ls", "pwd", "whoami", "df", "free"]
 
 async def execute_shell_command(command: str):
-    f"""
+    """
     Execute a shell command and return its output
-    Allowed cmds: {ALLOWED_CMDS}
     """
     try:
         print(f"command request: {command}")
@@ -13,6 +14,7 @@ async def execute_shell_command(command: str):
             return "Error: Command not allowed"
         result = subprocess.run(
             command,
+            cwd=env_settings.AGENT_WORK_DIR,
             shell=True,
             check=True,
             text=True,
