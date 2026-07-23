@@ -24,6 +24,7 @@ async def call_llm(
     )
 
     logger.info(f"Raw LLM response: {llm_response}")
+    logger.info(f"Token usage:\nInput tokens: {llm_response.prompt_eval_count}\nOutput tokens: {llm_response.eval_count}")
 
     return llm_response
 
