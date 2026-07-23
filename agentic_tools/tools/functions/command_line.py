@@ -1,6 +1,10 @@
+import logging
 import subprocess
 
 from config.env_config import env_settings
+
+logger = logging.getLogger(__name__)
+
 
 ALLOWED_CMDS = ["ls", "pwd", "whoami", "df", "free"]
 
@@ -9,7 +13,7 @@ async def execute_shell_command(command: str):
     Execute a shell command and return its output
     """
     try:
-        print(f"command request: {command}")
+        logger.info(f"Command request: {command}")
         if command.split()[0] not in ALLOWED_CMDS:
             return "Error: Command not allowed"
         result = subprocess.run(
