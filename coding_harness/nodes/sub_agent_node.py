@@ -3,9 +3,9 @@ import os
 from langsmith import traceable
 
 from services.ollama_llm_service import call_llm
-from coding_harness.states import MainAgentState
+from coding_harness.states import SubAgentState
 from config.env_config import env_settings
-from coding_harness.tool_registries.main_agent_tool_registry import TOOLS as MAIN_AGENT_TOOLS
+from coding_harness.tool_registries.sub_agent_tool_registry import TOOLS as SUB_AGENT_TOOLS
 from agentic_tools.adapter import build_ollama_tools
 
 
@@ -21,11 +21,11 @@ Your tasks:
     - Consolidate the final reply to the user after the task is done
 """
 
-agent_tool_registry = {**MAIN_AGENT_TOOLS}
+agent_tool_registry = {**SUB_AGENT_TOOLS}
 agent_tools = build_ollama_tools(agent_tool_registry)
 
 @traceable
-async def main_agent(state: MainAgentState):
+async def sub_agent(state: SubAgentState):
     os.makedirs(env_settings.AGENT_WORK_DIR, exist_ok=True)
 
     messages = [{
