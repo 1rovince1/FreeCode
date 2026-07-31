@@ -1,0 +1,29 @@
+import logging
+import subprocess
+
+from config.env_config import env_settings
+
+logger = logging.getLogger(__name__)
+
+
+ALLOWED_CMDS = ["ls", "pwd", "whoami", "df", "free", "grep", "glob", "rm", "touch", "cat", "nano"]
+
+async def execute_shell_command(command: str):
+    """
+    Execute a shell command and return its output
+    """
+    try:
+        logger.info(f"Command request: {command}")
+        if command.split()[0] not in ALLOWED_CMDS:
+            return "Error: Command not allowed"
+        result = subprocess.run(
+            command,
+            cwd=env_settings.AGENT_WORK_DIR,
+            shell=True,
+            check=True,
+            text=True,
+            capture_output=True
+        )
+        return result.stdout.strip() if result.stdout else "Command executed successfully"
+    except subprocess.CalledProcessError as e:
+        return f"Error executing command: {e}"
