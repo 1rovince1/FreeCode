@@ -1,4 +1,4 @@
-from coding_harness.orchestration import compiled_harness
+from coding_harness.orchestration_main_agent import compiled_harness
 
 
 try:

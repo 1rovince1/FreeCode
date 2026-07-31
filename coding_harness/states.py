@@ -1,4 +1,6 @@
+from typing import Annotated
 from typing_extensions import TypedDict
+import operator
 
 
 class MainAgentState(TypedDict):
@@ -6,6 +8,18 @@ class MainAgentState(TypedDict):
     main_agent_calls: int
     session_input_tokens: int
     session_output_tokens: int
+    tool_registry: dict
+    tool_calls: list
+    tool_results: list
+    sub_agent_calls: list
+    sub_agent_results: Annotated[list[str], operator.add]
+
+class SubAgentState(TypedDict):
+    # tasks: list[str]
+    # tasks_results: Annotated[list[str], operator.add]
+    current_task: str
+    session_messages: list[dict[str, str]]
+    sub_agent_calls: int
     tool_registry: dict
     tool_calls: list
     tool_results: list

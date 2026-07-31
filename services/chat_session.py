@@ -3,7 +3,7 @@ from uuid import UUID
 import json
 
 from clients.redis_client import redis_manager
-from coding_harness.orchestration import compiled_harness
+from coding_harness.orchestration_main_agent import compiled_harness
 from config.env_config import env_settings
 
 logger = logging.getLogger(__name__)
