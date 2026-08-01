@@ -14,7 +14,7 @@ class OllamaClient:
     async def connect(self):
         logger.info("Connecting to Ollama client...")
         self.client = AsyncClient(
-            host = "https://ollama.com",
+            host = env_settings.OLLAMA_HOST,
             headers = {"Authorization": "Bearer " + env_settings.OLLAMA_API_KEY}
         )
         logger.info("Connected to Ollama client!")

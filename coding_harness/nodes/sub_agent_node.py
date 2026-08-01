@@ -4,34 +4,29 @@ import logging
 from langsmith import traceable
 
 from services.ollama_llm_service import call_llm
-from coding_harness.states import MainAgentState
+from coding_harness.states import SubAgentState
 from config.env_config import env_settings
-from coding_harness.tool_registries.main_agent_tool_registry import TOOLS as MAIN_AGENT_TOOLS
+from coding_harness.tool_registries.sub_agent_tool_registry import TOOLS as SUB_AGENT_TOOLS
 from agentic_tools.adapter import build_ollama_tools
 
 logger = logging.getLogger(__name__)
 
 
 prompt = """
-You are a coding assistant.
+You are a generic helper agent, and your job is complete whatever task has been delegated to you with the help of avialable tools.
 Your tasks:
-    - Analyze the user request
-    - Ask to the user for any clarifications requried to perform the given task
-    - If the task is of less complexity, do it on your own
-    - If the task is complex you can delegate tasks to other sub agents with detailed instructions
-    - Save the final generate codes or data to files via the CLI tools
-    - if given a coding task, create proper test cases to check each functionality thoroughly
-    - Consolidate the final reply to the user after the task is done
+    - Analyze the task
+    - Save the final generate codes or data to files via the CLI
+    - Consolidate the final reply to the master after the task is done
 """
 
-agent_tool_registry = {**MAIN_AGENT_TOOLS}
+agent_tool_registry = {**SUB_AGENT_TOOLS}
 agent_tools = build_ollama_tools(agent_tool_registry)
 
 
 @traceable
-async def main_agent(state: MainAgentState):
-    logger.info("Inside main agent node")
-    logger.debug(f"state inside main agent node: {state}")
+async def sub_agent(state: SubAgentState):
+    logger.info("Inside sub agent node")
     os.makedirs(env_settings.AGENT_WORK_DIR, exist_ok=True)
 
     messages = [{
@@ -42,14 +37,14 @@ async def main_agent(state: MainAgentState):
     
     llm_response = await call_llm(
         messages=messages,
-        model=env_settings.OLLAMA_MAIN_AGENT_MODEL,
+        model=env_settings.OLLAMA_SUB_AGENT_MODEL,
         tools=agent_tools
     )
-
+    
     state_updates = {
-        "session_messages": []
+            "session_messages": []
     }
-    state_updates["main_agent_calls"] = state.get("main_agent_calls", 0) + 1
+    state_updates["sub_agent_calls"] = state.get("sub_agent_calls", 0) + 1
     if llm_response:
         state_updates["session_input_tokens"] = state.get("session_input_tokens", 0) + llm_response.prompt_eval_count
         state_updates["session_output_tokens"] = state.get("session_output_tokens", 0) + llm_response.eval_count
@@ -75,5 +70,5 @@ async def main_agent(state: MainAgentState):
         state_updates["tool_calls"] = []
         state_updates["tool_results"] = []
 
-    logger.info("Exiting main agent node")
+    logger.info("Exiting sub agent node")
     return state_updates
