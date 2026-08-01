@@ -4,10 +4,16 @@ from ollama import ChatResponse
 
 from clients.ollama_llm_client import ollama_manager
 # from langchain_ollama import ChatOllama
+from helpers.retry_utils import retry_with_backoff_async
 
 logger = logging.getLogger(__name__)
 
 
+@retry_with_backoff_async(
+        retry_count=5, 
+        retry_multiplier=5,
+        exceptions_to_retry=[TimeoutError]
+)
 async def call_llm(
         messages: list[str],
         model: str,
@@ -16,11 +22,15 @@ async def call_llm(
 ) -> ChatResponse:
     logger.info("Calling llm...")
 
-    llm_response = await ollama_manager.client.chat(
+    llm_response: ChatResponse = await ollama_manager.client.chat(
         model=model,
         messages=messages,
         tools=tools,
-        think=think
+        think=think,
+        options={
+            "num_ctx": 32768,
+            "n_thread": 6
+        }
     )
 
     logger.info(f"Raw LLM response: {llm_response}")

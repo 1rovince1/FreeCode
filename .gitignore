@@ -3,4 +3,4 @@ __pycache__/
 playground/
 .env
 *.log
-test.py
+*.txt

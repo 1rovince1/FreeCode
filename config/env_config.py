@@ -1,10 +1,12 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class EnvSettings(BaseSettings):
-    model_config = SettingsConfigDict(env_file="../.env", extra="allow")
+    model_config = SettingsConfigDict(env_file=".env", extra="allow")
 
+    OLLAMA_HOST: str = "https://ollama.com"
     OLLAMA_API_KEY: str
     OLLAMA_MAIN_AGENT_MODEL: str = "gemma4:cloud"
+    OLLAMA_SUB_AGENT_MODEL: str = "gemma4:cloud"
     AGENT_WORK_DIR: str
 
     LOG_DIR: str = "dev_logs"

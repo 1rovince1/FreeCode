@@ -2,4 +2,3 @@ from coding_harness.nodes.main_agent_node import main_agent
 from coding_harness.nodes.tool_call_node import tool_call
 from coding_harness.nodes.sub_agent_node import sub_agent
 from coding_harness.nodes.dispatch_node import task_dispatcher
-from coding_harness.nodes.synthesize_node import task_synthesizer
