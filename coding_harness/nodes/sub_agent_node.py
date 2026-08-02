@@ -38,7 +38,8 @@ async def sub_agent(state: SubAgentState):
     llm_response = await call_llm(
         messages=messages,
         model=env_settings.OLLAMA_SUB_AGENT_MODEL,
-        tools=agent_tools
+        tools=agent_tools,
+        think=True
     )
     
     state_updates = {

@@ -14,13 +14,15 @@ logger = logging.getLogger(__name__)
 
 prompt = """
 You are a coding assistant.
+You have access to a few tools to help with your job.
 Your tasks:
     - Analyze the user request
     - Ask to the user for any clarifications requried to perform the given task
     - If the task is of less complexity, do it on your own
-    - If the task is complex you can delegate tasks to other sub agents with detailed instructions
-    - Save the final generate codes or data to files via the CLI tools
-    - if given a coding task, create proper test cases to check each functionality thoroughly
+    - If the task is complex you can delegate tasks to sub agents with detailed instructions
+    - If nature of tasks allows it, then multiple sub agents should be used in parallel to keep individual workload in check
+    - Task given to a sub agent should be simple and complete instructions should be provided for guidance
+    - You and sub agents have access to the same working dir, and all the coding should be done in there
     - Consolidate the final reply to the user after the task is done
 """
 
@@ -43,7 +45,8 @@ async def main_agent(state: MainAgentState):
     llm_response = await call_llm(
         messages=messages,
         model=env_settings.OLLAMA_MAIN_AGENT_MODEL,
-        tools=agent_tools
+        tools=agent_tools,
+        think=True
     )
 
     state_updates = {
