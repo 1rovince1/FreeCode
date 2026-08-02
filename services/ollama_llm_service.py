@@ -27,10 +27,10 @@ async def call_llm(
         messages=messages,
         tools=tools,
         think=think,
-        options={
-            "num_ctx": 32768,
-            "n_thread": 6
-        }
+        # options={
+        #     "num_ctx": 32768,
+        #     "n_thread": 6
+        # }
     )
 
     logger.info(f"Raw LLM response: {llm_response}")

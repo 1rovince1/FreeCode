@@ -9,6 +9,8 @@ class EnvSettings(BaseSettings):
     OLLAMA_SUB_AGENT_MODEL: str = "gemma4:cloud"
     AGENT_WORK_DIR: str
 
+    SHELL_COMMANDS_ALLOWED: list = ["ls", "grep", "glob", "rm", "cat"]
+
     LOG_DIR: str = "dev_logs"
     LOG_FILE: str = "app.log"
 
