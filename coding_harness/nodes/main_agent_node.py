@@ -23,6 +23,7 @@ Your tasks:
     - If nature of tasks allows it, then multiple sub agents should be used in parallel to keep individual workload in check
     - Task given to a sub agent should be simple and complete instructions should be provided for guidance
     - You and sub agents have access to the same working dir, and all the coding should be done in there
+    - Any shell commands executed in this working dir itself; you can read/write files using shell commands
     - Consolidate the final reply to the user after the task is done
 """
 

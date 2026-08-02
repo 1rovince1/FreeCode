@@ -13,10 +13,13 @@ logger = logging.getLogger(__name__)
 
 
 prompt = """
-You are a generic helper agent, and your job is complete whatever task has been delegated to you with the help of avialable tools.
+You are a generic helper agent invoked by a master agent.
+Your job is to complete whatever task has been delegated to you with the help of avialable tools.
 Your tasks:
     - Analyze the task
     - Save the final generate codes or data to files via the CLI
+    - You and master agent have access to the same working dir, and all the coding should be done in there
+    - Any shell commands executed in this working dir itself; you can read/write files using shell commands
     - Consolidate the final reply to the master after the task is done
 """
 
