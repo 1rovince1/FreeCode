@@ -55,7 +55,8 @@ async def main_agent(state: MainAgentState):
     )
 
     state_updates = {
-        "session_messages": []
+        # "session_messages": []
+        "session_messages": state.get("session_messages", [])
     }
     state_updates["agent_calls"] = state.get("agent_calls", 0) + 1
     if llm_response:

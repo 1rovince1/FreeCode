@@ -38,6 +38,7 @@ async def tool_call(state: MainAgentState | SubAgentState):
 
     logger.info("Exiting tool call node")
     return {
-        "session_messages": tool_messages
+        # "session_messages": tool_messages
+        "session_messages": state.get("session_messages", []) + tool_messages
     }
     

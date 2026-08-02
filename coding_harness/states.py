@@ -4,8 +4,9 @@ import operator
 
 
 class MainAgentState(TypedDict):
-    session_messages: Annotated[list[dict[str, str]], operator.add]
-    main_agent_calls: int
+    # session_messages: Annotated[list[dict[str, str]], operator.add]
+    session_messages: list[dict[str, str]]
+    agent_calls: int
     session_input_tokens: int
     session_output_tokens: int
     session_current_token_count: int
@@ -19,8 +20,9 @@ class SubAgentState(TypedDict):
     # tasks: list[str]
     # tasks_results: Annotated[list[str], operator.add]
     current_task: str
-    session_messages: Annotated[list[dict[str, str]], operator.add]
-    sub_agent_calls: int
+    # session_messages: Annotated[list[dict[str, str]], operator.add]
+    session_messages: list[dict[str, str]]
+    agent_calls: int
     session_input_tokens: int
     session_output_tokens: int
     session_current_token_count: int

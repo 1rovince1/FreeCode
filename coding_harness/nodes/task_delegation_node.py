@@ -42,5 +42,6 @@ async def task_delegator(state: MainAgentState):
 
     logger.info("Exiting task delegator node")
     return {
-        "session_messages": tool_messages
+        # "session_messages": tool_messages
+        "session_messages": state.get("session_messages", []) + tool_messages
     }
