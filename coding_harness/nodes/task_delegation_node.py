@@ -7,8 +7,8 @@ from coding_harness.orchestration_sub_agent import compiled_sub_agent_orchestrat
 logger = logging.getLogger(__name__)
 
 
-async def task_dispatcher(state: MainAgentState):
-    logger.info("Inside task dispatcher node")
+async def task_delegator(state: MainAgentState):
+    logger.info("Inside task delegator node")
     tool_calls = state.get("tool_calls", [])
     sub_tasks = [
         tool_call["tool_args"]["task"]
@@ -40,7 +40,7 @@ async def task_dispatcher(state: MainAgentState):
                 "content": sub_agent_results[idx]["session_messages"][-1]["content"]
             })
 
-    logger.info("Exiting task dispatcher nodes")
+    logger.info("Exiting task delegator node")
     return {
         "session_messages": tool_messages
     }
