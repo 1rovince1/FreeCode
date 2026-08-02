@@ -32,8 +32,9 @@ def tool_call_decision_edge(state: MainAgentState | SubAgentState) -> str:
 
     node_list = []
     if tool_node_tasks:
-        node_list.append("tool_call")
+        node_list.append("tool")
     if delegate_node_tasks:
-        node_list.append("task_delegator")
+        node_list.append("delegate")
 
+    logger.info("Exiting tool call decision edge")
     return node_list

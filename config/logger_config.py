@@ -27,7 +27,7 @@ def setup_logging(LOG_DIR="logs", LOG_FILE="app.log"):
             },
             "file_handler": {
                 "class": "logging.handlers.RotatingFileHandler",
-                "level": "INFO",
+                "level": "DEBUG",
                 "formatter": "file_formatter",
                 "filename": LOG_FILEPATH,
                 "maxBytes": 10*1024*1024,

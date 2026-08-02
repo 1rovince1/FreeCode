@@ -8,6 +8,7 @@ class MainAgentState(TypedDict):
     main_agent_calls: int
     session_input_tokens: int
     session_output_tokens: int
+    session_current_token_count: int
     tool_registry: dict
     tool_calls: list
     tool_results: list
@@ -22,6 +23,7 @@ class SubAgentState(TypedDict):
     sub_agent_calls: int
     session_input_tokens: int
     session_output_tokens: int
+    session_current_token_count: int
     tool_registry: dict
     tool_calls: list
     tool_results: list

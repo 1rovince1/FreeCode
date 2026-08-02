@@ -1,4 +1,5 @@
 from coding_harness.nodes.main_agent_node import main_agent
 from coding_harness.nodes.tool_call_node import tool_call
 from coding_harness.nodes.sub_agent_node import sub_agent
+from coding_harness.nodes.context_compression_node import context_compressor
 from coding_harness.nodes.task_delegation_node import task_delegator
