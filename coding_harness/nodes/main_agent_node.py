@@ -57,7 +57,7 @@ async def main_agent(state: MainAgentState):
     state_updates = {
         "session_messages": []
     }
-    state_updates["main_agent_calls"] = state.get("main_agent_calls", 0) + 1
+    state_updates["agent_calls"] = state.get("agent_calls", 0) + 1
     if llm_response:
         state_updates["session_input_tokens"] = state.get("session_input_tokens", 0) + llm_response.prompt_eval_count
         state_updates["session_output_tokens"] = state.get("session_output_tokens", 0) + llm_response.eval_count
