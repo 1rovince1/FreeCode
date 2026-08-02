@@ -6,7 +6,7 @@ from config.env_config import env_settings
 logger = logging.getLogger(__name__)
 
 
-ALLOWED_CMDS = ["ls", "pwd", "whoami", "df", "free", "grep", "glob", "rm", "touch", "cat", "nano"]
+ALLOWED_CMDS = env_settings.SHELL_COMMANDS_ALLOWED
 
 async def execute_shell_command(command: str):
     """
