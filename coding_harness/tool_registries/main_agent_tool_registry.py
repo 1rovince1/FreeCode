@@ -6,7 +6,7 @@ TOOLS = {
         "description": execute_shell_command.__doc__.strip(),
         "input_schema": ExcuteShellCommand
     },
-    "invoke_sub_agent": {
+    "invoke_generic_sub_agent": {
         "description": "General reasoning sub-agent with tools",
         "input_schema": SubAgentTool
     }

@@ -5,36 +5,43 @@ from coding_harness.states import MainAgentState, SubAgentState
 logger = logging.getLogger(__name__)
 
 
-def tool_call_decision_edge(state: MainAgentState | SubAgentState) -> str:
+def tool_call_decision_edge(state: MainAgentState | SubAgentState) -> bool:
     logger.info("Inside tool call decision edge")
 
     combined_tool_calls = state.get("tool_calls", [])
 
-    # tool_node_tasks = [
-    #     tool_call
-    #     for tool_call in combined_tool_calls
-    #     if tool_call["tool_name"] != "invoke_sub_agent"
-    # ]
-    # delegate_node_tasks = [
-    #     tool_call
-    #     for tool_call in combined_tool_calls
-    #     if tool_call["tool_name"] == "invoke_sub_agent"
-    # ]
-    tool_node_tasks = False
-    delegate_node_tasks = False
-    for tool_call in combined_tool_calls:
-        if tool_call["tool_name"] == "invoke_sub_agent":
-            delegate_node_tasks = True
-        else:
-            tool_node_tasks = True
-        if delegate_node_tasks and tool_node_tasks:
-            break
+    # # tool_node_tasks = [
+    # #     tool_call
+    # #     for tool_call in combined_tool_calls
+    # #     if tool_call["tool_name"] != "invoke_generic_sub_agent"
+    # # ]
+    # # delegate_node_tasks = [
+    # #     tool_call
+    # #     for tool_call in combined_tool_calls
+    # #     if tool_call["tool_name"] == "invoke_generic_sub_agent"
+    # # ]
+    # tool_node_tasks = False
+    # delegate_node_tasks = False
+    # for tool_call in combined_tool_calls:
+    #     if tool_call["tool_name"] == "invoke_generic_sub_agent":
+    #         delegate_node_tasks = True
+    #     else:
+    #         tool_node_tasks = True
+    #     if delegate_node_tasks and tool_node_tasks:
+    #         break
 
-    node_list = []
-    if tool_node_tasks:
-        node_list.append("tool")
-    if delegate_node_tasks:
-        node_list.append("delegate")
+    # node_list = []
+    # if tool_node_tasks:
+    #     node_list.append("tool")
+    # if delegate_node_tasks:
+    #     node_list.append("delegate")
+
+    # logger.info("Exiting tool call decision edge")
+    # return node_list
+
+    tool_calls = False
+    if combined_tool_calls:
+        tool_calls = True
 
     logger.info("Exiting tool call decision edge")
-    return node_list
+    return tool_calls

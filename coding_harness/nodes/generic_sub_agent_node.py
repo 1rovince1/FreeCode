@@ -30,7 +30,7 @@ agent_tools = build_ollama_tools(agent_tool_registry)
 
 
 @traceable
-async def sub_agent(state: SubAgentState):
+async def generic_sub_agent(state: SubAgentState):
     logger.info("Inside sub agent node")
     os.makedirs(env_settings.AGENT_WORK_DIR, exist_ok=True)
 

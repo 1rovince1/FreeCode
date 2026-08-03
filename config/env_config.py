@@ -12,7 +12,7 @@ class EnvSettings(BaseSettings):
     CONTEXT_TOKENS_ALLOWED: int = 32384
     AGENT_WORK_DIR: str
 
-    SHELL_COMMANDS_ALLOWED: list = ["ls", "grep", "glob", "rm", "cat"]
+    SHELL_COMMANDS_ALLOWED: list = ["ls", "grep", "glob", "rm", "cat", "echo"]
 
     LOG_DIR: str = "dev_logs"
     LOG_FILE: str = "app.log"
