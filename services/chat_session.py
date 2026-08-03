@@ -17,25 +17,20 @@ async def process_user_request(
 
     session_key = f"session-{session_id}"
     redis_session = await redis_manager.client.get(name=session_key)
-    session_data = json.loads(redis_session) if redis_session else {"session_messages": []}
-    session_messages = session_data["session_messages"]
+    session_state = json.loads(redis_session) if redis_session else {"session_messages": []}
 
-    session_messages.append({
+    session_state["session_messages"].append({
         "role": "user",
         "content": user_query
     })
 
-    result = await compiled_harness.ainvoke({
-        "session_messages": session_messages
-    })
-    logger.info(f"User request processing result: {result}")
-
-    workflow_messages = result.get("session_messages", [])
+    resultant_state = await compiled_harness.ainvoke(session_state)
+    logger.info(f"User request processing result: {resultant_state}")
 
     await redis_manager.client.set(
         name=session_key,
-        value=json.dumps({"session_messages": workflow_messages}),
+        value=json.dumps(resultant_state),
         ex=env_settings.CHAT_SESSION_EXPIRATION_TIME
     )
 
-    return workflow_messages[-1]["content"]
+    return resultant_state["session_messages"][-1]["content"]
