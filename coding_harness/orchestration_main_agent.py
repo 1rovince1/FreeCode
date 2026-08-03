@@ -62,8 +62,8 @@ code_harness.add_conditional_edges(
     "main_agent",
     tool_call_decision_edge,
     {
-        True: "tool_distributor",
-        False: END
+        "tool_calls": "tool_distributor",
+        "final_answer": END
     }
 )
 code_harness.add_edge("tool_distributor", "function_call")

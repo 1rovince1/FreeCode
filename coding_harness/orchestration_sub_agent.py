@@ -47,8 +47,8 @@ sub_agent_orchestration.add_conditional_edges(
     "generic_sub_agent",
     tool_call_decision_edge,
     {
-        True: "tool_distributor",
-        False: END
+        "tool_calls": "tool_distributor",
+        "final_answer": END
     }
 )
 sub_agent_orchestration.add_edge("tool_distributor", "function_call")

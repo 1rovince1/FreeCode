@@ -39,9 +39,9 @@ def tool_call_decision_edge(state: MainAgentState | SubAgentState) -> bool:
     # logger.info("Exiting tool call decision edge")
     # return node_list
 
-    tool_calls = False
+    decision = "final_answer"
     if combined_tool_calls:
-        tool_calls = True
+        decision = "tool_calls"
 
     logger.info("Exiting tool call decision edge")
-    return tool_calls
+    return decision
