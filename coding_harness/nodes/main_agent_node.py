@@ -55,12 +55,14 @@ async def main_agent(state: MainAgentState):
     )
 
     state_updates = {
-        "session_messages": []
+        # "session_messages": []
+        "session_messages": state.get("session_messages", [])
     }
-    state_updates["main_agent_calls"] = state.get("main_agent_calls", 0) + 1
+    state_updates["agent_calls"] = state.get("agent_calls", 0) + 1
     if llm_response:
         state_updates["session_input_tokens"] = state.get("session_input_tokens", 0) + llm_response.prompt_eval_count
         state_updates["session_output_tokens"] = state.get("session_output_tokens", 0) + llm_response.eval_count
+        state_updates["session_current_token_count"] = llm_response.prompt_eval_count + llm_response.eval_count
     if llm_response.message.content:
         state_updates["session_messages"].append({
             "role": "assistant",

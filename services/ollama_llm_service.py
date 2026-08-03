@@ -22,6 +22,7 @@ async def call_llm(
 ) -> ChatResponse:
     logger.info("Calling llm...")
 
+    logger.debug(f"Input messages: {messages}")
     llm_response: ChatResponse = await ollama_manager.client.chat(
         model=model,
         messages=messages,
@@ -32,7 +33,6 @@ async def call_llm(
         #     "n_thread": 6
         # }
     )
-
     logger.info(f"Raw LLM response: {llm_response}")
     logger.info(f"Token usage:\nInput tokens: {llm_response.prompt_eval_count}\nOutput tokens: {llm_response.eval_count}")
 
