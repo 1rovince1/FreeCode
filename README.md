@@ -1,5 +1,5 @@
 ### Coding Harness Worklfow
-LangGraph graph:
+LangGraph graph:  
 ![graph.png](graph.png)
 
 ### TODO:
