@@ -28,7 +28,9 @@ Your tasks:
     - Any shell commands executed in this working dir itself; you can read/write files using shell commands
     - Consolidate the final reply to the user after the task is done
 
-Allowed shell commands are: {env_settings.SHELL_COMMANDS_ALLOWED}
+Allowed shell commands via the shell tool are: {env_settings.SHELL_COMMANDS_ALLOWED}
+If you want to write to a file use this method: cat > filename <<'EOF'.....
+If you want to update some part an existing file use: sed ....
 """
 
 agent_tool_registry = {**MAIN_AGENT_TOOLS}

@@ -1,6 +1,7 @@
 import logging
 from uuid import UUID
 import json
+import time
 
 from clients.redis_client import redis_manager
 from coding_harness.orchestration_main_agent import compiled_harness
@@ -27,6 +28,8 @@ async def process_user_request(
     resultant_state = await compiled_harness.ainvoke(session_state)
     logger.info(f"User request processing result: {resultant_state}")
 
+    resultant_state["updated_at"] = int(time.time())
+
     await redis_manager.client.set(
         name=session_key,
         value=json.dumps(resultant_state),
@@ -34,3 +37,26 @@ async def process_user_request(
     )
 
     return resultant_state["session_messages"][-1]["content"]
+
+
+async def get_all_active_sessions():
+    session_key_pattern = "session-*"
+
+    try:
+        matching_keys = []
+        match_results = redis_manager.client.scan_iter(match=session_key_pattern)
+        async for key in match_results:
+            matching_keys.append(key)
+    except Exception as e:
+        print(f"Exception {e}")
+
+    sessions_data = await redis_manager.client.mget(matching_keys)
+
+    sessions = [
+        (session_key.removeprefix("session-"), json.loads(session_data))
+        for session_key, session_data in zip(matching_keys, sessions_data)
+        if session_data is not None
+    ]
+    sessions.sort(key=lambda x: x[1]["updated_at"], reverse=True)
+    
+    return sessions

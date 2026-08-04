@@ -2,5 +2,5 @@
 __pycache__/
 playground/
 .env
-*.log
+*.log*
 *.txt

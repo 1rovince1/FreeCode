@@ -1,12 +1,15 @@
 import logging
 import asyncio
 
+from langsmith import traceable
+
 from coding_harness.states import MainAgentState, SubAgentState
 from coding_harness.orchestration_sub_agent import compiled_sub_agent_orchestration
 
 logger = logging.getLogger(__name__)
 
 
+@traceable
 async def task_delegator(state: MainAgentState):
     logger.info("Inside task delegator node")
     # tool_calls = state.get("tool_calls", [])

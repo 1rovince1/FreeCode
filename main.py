@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from clients.ollama_llm_client import ollama_manager
 from clients.redis_client import redis_manager
 from api.routes.coding_harness import router as CodingRouter
+from api.routes.session_management import router as SessionRouter
 
 
 @asynccontextmanager
@@ -37,6 +38,7 @@ fastapi_app.add_middleware(
 )
 
 fastapi_app.include_router(CodingRouter)
+fastapi_app.include_router(SessionRouter)
 
 
 @fastapi_app.get("/")

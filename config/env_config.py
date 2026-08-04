@@ -9,10 +9,10 @@ class EnvSettings(BaseSettings):
     OLLAMA_SUB_AGENT_MODEL: str = "gemma4:cloud"
     OLLAMA_CONTEXT_COMPRESSION_MODEL: str = "gpt-oss:120b-cloud"
 
-    CONTEXT_TOKENS_ALLOWED: int = 32384
+    CONTEXT_TOKENS_ALLOWED: int = 16384
     AGENT_WORK_DIR: str
 
-    SHELL_COMMANDS_ALLOWED: list = ["ls", "grep", "glob", "rm", "cat", "echo"]
+    SHELL_COMMANDS_ALLOWED: list = ["ls", "grep", "glob", "rm", "cat", "echo", "sed"]
 
     LOG_DIR: str = "dev_logs"
     LOG_FILE: str = "app.log"

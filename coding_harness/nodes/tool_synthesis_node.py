@@ -1,10 +1,13 @@
 import logging
 
+from langsmith import traceable
+
 from coding_harness.states import MainAgentState
 
 logger = logging.getLogger(__name__)
 
 
+@traceable
 async def tool_synthesizer(state: MainAgentState):
     logger.info("Inside tool synthesizer node")
 

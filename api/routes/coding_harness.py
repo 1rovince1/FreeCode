@@ -27,11 +27,3 @@ async def request_to_agent(request: ChatRequest):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Error processing user request"
         )
-
-@router.get("/create_session")
-async def create_session_request():
-    import uuid
-    return {
-        "message": "Session created",
-        "session_id": uuid.uuid4()
-    }

@@ -3,6 +3,7 @@ LangGraph graph:
 ![graph.png](graph.png)
 
 ### TODO:
+- edit file tool to perform changes in specific parts in file
 - streaming response to user
 - proper context setup (like claude.md or something)
 - skills' integration

@@ -1,12 +1,15 @@
 import logging
 import asyncio
 
+from langsmith import traceable
+
 from coding_harness.states import MainAgentState, SubAgentState
 from agentic_tools.utils.call_tool import call_function
 
 logger = logging.getLogger(__name__)
 
 
+@traceable
 async def function_call(state: MainAgentState | SubAgentState):
     logger.info("Inside function call node")
     logger.debug(f"state inside function call node: {state}")

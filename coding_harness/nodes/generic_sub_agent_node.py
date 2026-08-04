@@ -20,9 +20,11 @@ Your tasks:
     - Save the final generate codes or data to files via the CLI
     - You and master agent have access to the same working dir, and all the coding should be done in there
     - Any shell commands executed in this working dir itself; you can read/write files using shell commands
-    - Report to the master agent after the task is done with clear description of what has been done
+    - Report to the master agent after the task is done with clear description and proof of what has been done
 
-Allowed shell commands are: {env_settings.SHELL_COMMANDS_ALLOWED}
+Allowed shell commands via the shell tool are: {env_settings.SHELL_COMMANDS_ALLOWED}
+If you want to write to a file use this method: cat > filename <<'EOF'.....
+If you want to update some part an existing file use: sed ....
 """
 
 agent_tool_registry = {**SUB_AGENT_TOOLS}
