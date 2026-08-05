@@ -19,7 +19,7 @@ This compressed context will replace the given context, and will be used to furt
 When generting a context summary:
 Clearly mention the goal (user's request):
 **GOAL**
-Clearly the mention the steps taken till now:
+Clearly mention what has been done to achieve the goal, and what more is required:
 **Steps taken**
 
 The resulting summary would be a prompt that would guide the agents to work towards the goal, which was the user's request.
