@@ -123,8 +123,9 @@ with st.sidebar:
 
 # 5. Render chat history from st.session_state
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    if (message["role"] == "user" or message["role"] == "assistant") and message.get("content", None):
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
 # 6. Chat Input Logic
 if prompt := st.chat_input():

@@ -23,7 +23,9 @@ Clearly mention what has been done to achieve the goal, and what more is require
 **Steps taken**
 
 The resulting summary would be a prompt that would guide the agents to work towards the goal, which was the user's request.
+Important things like the plan of work should not be summarised and kept as they are in the context.
 """
+# If something is important (like the work plan, etc.) to the goal and process, it should not be summarised and tried to be replicated in the new context.
 
 
 @traceable
